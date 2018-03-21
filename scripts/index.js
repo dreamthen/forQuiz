@@ -185,39 +185,295 @@
 // zepto.Z.prototype = Z.prototype = $.fn;
 // var p = $('p');
 // console.log(p.css('font-size'));
-var jQuery = function (selector) {
-    return new jQuery.fn.init(selector);
-};
-
-function camlize(string) {
-    return string.replace(/-+(.)?/, function (match, string_imp) {
-        return string_imp.toUpperCase();
+// var jQuery = function (selector) {
+//     return new jQuery.fn.init(selector);
+// };
+//
+// function camlize(string) {
+//     return string.replace(/-+(.)?/, function (match, string_imp) {
+//         return string_imp.toUpperCase();
+//     });
+// }
+//
+// jQuery.prototype = jQuery.fn = {
+//     constructor: init,
+//     css(property, value) {
+//         if (arguments.length < 2) {
+//             var element = this[0];
+//             if (!element) return;
+//             return element.style[camlize(property)] || getComputedStyle(element, '').getPropertyValue(property);
+//         }
+//     },
+//     html(value) {
+//
+//     }
+// };
+// var init = jQuery.fn.init = function (selector) {
+//     var slice = Array.prototype.slice,
+//         dom = slice.call(document.querySelectorAll(selector)),
+//         len = dom ? dom.length : 0;
+//     for (var i = 0; i < len; i++) {
+//         this[i] = dom[i];
+//     }
+//     this.length = len;
+//     this.selector = selector;
+// };
+// init.prototype = jQuery.fn;
+// var p = jQuery('p');
+// console.log(p.css('font-size'));
+// jQuery.fn.getNodeName = function () {
+//     return this[0].nodeName;
+// };
+// $(function() {
+//     var p = $("p");
+//     console.log(p);
+//     console.log(p.getNodeName());
+// });
+// 同步代码立即执行
+// 异步代码会先放进异步队列中,暂不执行
+// 主进程中的同步代码执行完毕之后,轮询异步队列中的异步代码
+// setTimeout(function timer(){
+//     console.log('a');
+// });
+// console.log('b');
+// setTimeout(function timer(){
+//     console.log('a');
+// }, 1000);
+// setTimeout(function timer(){
+//     console.log('b');
+// });
+// console.log('c');
+// let xhr = new XMLHttpRequest();
+// xhr.open('get', '../data/data.json', false);
+// xhr.onreadystatechange = function () {
+//     if (xhr.readyState === 4) {
+//         if (xhr.status === 200) {
+//             console.log(JSON.parse(xhr.responseText));
+//         }
+//     }
+// };
+// xhr.send(null);
+// $.ajax({
+//     url: "../data/data.json",
+//     dataType: "json",
+//     type: "get",
+//     contentType: "application/json",
+//     success(response, status) {
+//         console.log(response);
+//     }
+// });
+// setTimeout(function timer() {
+//     console.log("a");
+// }, 1000);
+// setTimeout(function timer() {
+//     console.log("b");
+// });
+// console.log("c");
+// 对扩展开放，对修改封闭
+// $.ajax({
+//     url: "../data/data.json",
+//     type: "get",
+//     dataType: "json",
+//     contentType: "application/json",
+//     success(response, status) {
+//         console.log(response.header);
+//         console.log(response.body);
+//     },
+//     error() {
+//         console.log("fail");
+//     }
+// });
+// var ajax = $.ajax("../data/data.json", {type: "get", dataType: "json", contentType: "application/json"});
+// ajax.done(function done(data) {
+//     console.log("success 1");
+//     console.log(data);
+// }).fail(function fail() {
+//     console.log("fail 1");
+// }).done(function done(data) {
+//     console.log("success 2");
+//     console.log(data);
+// }).fail(function fail() {
+//     console.log("fail 2")
+// });
+// var ajax = $.ajax("../data/data.json", {type: "get", dataType: "json", contentType: "application/json", async: false});
+// ajax.then(function resolve(data) {
+//     console.log("success 1");
+//     console.log(data);
+//     return data;
+// }, function reject() {
+//     console.log("fail");
+// }).then(function resolve(data) {
+//     console.log("success 2");
+//     console.log(data);
+//     return data;
+// }, function reject() {
+//     console.log("fail");
+// }).then(function resolve(data) {
+//     console.log("success 3");
+//     console.log(data);
+// }, function reject() {
+//     console.log("fail");
+// });
+// function wait() {
+//     function task() {
+//         console.log("执行完毕~");
+//     }
+//     setTimeout(task, 2000);
+// }
+// wait();
+// function wget() {
+//     var dfd = $.Deferred();
+//     var wait = function (dfd) {
+//         var task = function () {
+//             console.log("执行成功");
+//             dfd.resolve();
+//             // dfd.reject();
+//         };
+//         setTimeout(task, 2000);
+//         return dfd;
+//     };
+//     return wait(dfd);
+// }
+// var w = wget();
+// w.then(function resolve() {
+//     console.log("ok 1");
+// }, function reject() {
+//     console.log("error 1");
+// });
+// w.then(function resolve() {
+//     console.log("ok 2");
+// }, function reject() {
+//     console.log("error 2");
+// });
+// w.reject();
+// w.then(function resolve() {
+//     console.log("ok 1");
+// }, function reject() {
+//     console.log("error 1");
+// }).then(function resolve() {
+//     console.log("ok 2");
+// }, function reject() {
+//     console.log("error 2");
+// });
+// $.Deferred() $.when(w)
+// function wget() {
+//     var dfd = $.Deferred();
+//     var wait = function (dfd) {
+//         var task = function () {
+//             console.log("执行完毕");
+//             dfd.resolve();
+//         };
+//         setTimeout(task, 2000);
+//         return dfd.promise;
+//     };
+//     return wait(dfd);
+// }
+// var w = wget();
+// w.reject();
+// $.when(w).then(function resolve() {
+//     console.log("ok 1");
+// }, function reject() {
+//     console.log("error 1");
+// }).then(function resolve() {
+//     console.log("ok 2");
+// }, function reject() {
+//     console.log("error 2");
+// });
+// 捕获错误:
+// 1.在reject不存在定义的情况下,语法错误
+// 2.在reject不存在定义的情况下,reject图片错误
+// function loadImage(src) {
+//     return new Promise(function promise(resolve, reject) {
+//         var image = document.createElement("img");
+// throw new Error("自定义错误");
+// image.onload = function () {
+//             resolve(image);
+//         };
+//         image.onerror = function () {
+//             reject("图片错误~");
+//         };
+//         image.src = src;
+//     });
+// }
+// var result = loadImage("https://www.1jtec.com/images/keryiBarter_description_bg1.png");
+// result.then(function resolve(img) {
+//     console.log(img.width);
+//     return img;
+// }).then(function resolve(img) {
+//     console.log(img.height);
+// }).catch(function err(error) {
+//     console.log(error);
+// });
+// 串联
+// function loadImage(src) {
+//     return new Promise(function promise(resolve, reject) {
+//         var image = document.createElement("img");
+//         image.onload = function () {
+//             resolve(image);
+//         };
+//         image.onerror = function () {
+//             reject();
+//         };
+//         image.src = src;
+//     });
+// }
+// var result_one = loadImage("https://www.1jtec.com/images/keryiBarter_description_bg.png"),
+//     result_two = loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png");
+// result_one.then(function resolve(image) {
+//     console.log(image.width);
+//     return result_two;
+// }, function reject() {
+//     console.log("error 1~");
+// }).then(function resolve(image) {
+//     console.log(image.width);
+// }, function reject() {
+//     console.log("error 2~");
+// }).catch(function err(error) {
+//     console.log(error);
+// });
+// all and race
+// function loadImage(src) {
+//     return new Promise(function promise(resolve, reject) {
+//         var img = document.createElement("img");
+//         img.onload = function () {
+//             resolve(img);
+//         };
+//         img.onerror = function () {
+//             reject();
+//         };
+//         img.src = src;
+//     });
+// }
+// function putImage(images) {
+// console.log(images);
+//     for (let i = 0; i < images.length; i++) {
+//         document.body.appendChild(images[i]);
+//     }
+// }
+// Promise.all([
+//     loadImage("https://www.1jtec.com/images/keryiBarter_description_bg.png"),
+//     loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png"),
+//     loadImage("https://www.1jtec.com/images/keryiBarter_register_bg.png")
+// ]).then(putImage);
+function loadImage(src) {
+    return new Promise(function promise(resolve, reject) {
+        var img = document.createElement("img");
+        img.onload = function () {
+            resolve(img);
+        };
+        img.onerror = function () {
+            reject();
+        };
+        img.src = src;
     });
 }
 
-jQuery.prototype = jQuery.fn = {
-    constructor: init,
-    css(property, value) {
-        if (arguments.length < 2) {
-            var element = this[0];
-            if (!element) return;
-            return element.style[camlize(property)] || getComputedStyle(element, '').getPropertyValue(property);
-        }
-    },
-    html(value) {
+function putImage(image) {
+    document.body.appendChild(image);
+}
 
-    }
-};
-var init = jQuery.fn.init = function (selector) {
-    var slice = Array.prototype.slice,
-        dom = slice.call(document.querySelectorAll(selector)),
-        len = dom ? dom.length : 0;
-    for (var i = 0; i < len; i++) {
-        this[i] = dom[i];
-    }
-    this.length = len;
-    this.selector = selector;
-};
-init.prototype = jQuery.fn;
-var p = jQuery('p');
-console.log(p.css('font-size'));
+Promise.race([
+    loadImage("https://www.1jtec.com/images/keryiBarter_description_bg.png"),
+    loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png"),
+    loadImage("https://www.1jtec.com/images/keryiBarter_register_bg.png")
+]).then(putImage);
