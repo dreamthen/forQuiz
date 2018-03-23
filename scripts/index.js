@@ -455,25 +455,185 @@
 //     loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png"),
 //     loadImage("https://www.1jtec.com/images/keryiBarter_register_bg.png")
 // ]).then(putImage);
-function loadImage(src) {
-    return new Promise(function promise(resolve, reject) {
-        var img = document.createElement("img");
-        img.onload = function () {
-            resolve(img);
-        };
-        img.onerror = function () {
-            reject();
-        };
-        img.src = src;
+// function loadImage(src) {
+//     return new Promise(function promise(resolve, reject) {
+//         var img = document.createElement("img");
+//         img.onload = function () {
+//             resolve(img);
+//         };
+//         img.onerror = function () {
+//             reject();
+//         };
+//         img.src = src;
+//     });
+// }
+// function putImage(image) {
+//     document.body.appendChild(image);
+// }
+// Promise.race([
+//     loadImage("https://www.1jtec.com/images/keryiBarter_description_bg.png"),
+//     loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png"),
+//     loadImage("https://www.1jtec.com/images/keryiBarter_register_bg.png")
+// ]).then(putImage);
+// async function sayNumber() {
+//     var girl = await "sun shine girl";
+//     console.log(girl);
+//     var age = await 99;
+//     console.log(age);
+// }
+// sayNumber();
+// function loadImage(src) {
+//     return new Promise(function promise(resolve, reject) {
+//         let img = document.createElement("img");
+//         img.src = src;
+//         img.onload = function () {
+//             resolve(img);
+//         };
+//         img.onerror = function () {
+//             reject();
+//         };
+//     });
+// }
+// let result_one = loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png"),
+//     result_two = loadImage("https://www.1jtec.com/images/keryiBarter_description_bg.png");
+// async function load() {
+//     let result = await result_one.then(function resolve(img) {
+//         console.log(img.width);
+//         return img.width;
+//     }, function reject() {
+//         console.log("error 1~");
+//     });
+//     console.log(result);
+//     let result_ano = await result_two.then(function resolve(img) {
+//         console.log(img.width);
+//         return img.height;
+//     }, function reject() {
+//         console.log("error 2~");
+//     });
+//     console.log(result_ano);
+// }
+// load();
+// function loadImage(src) {
+//     return new Promise(function promise(resolve, reject) {
+//         let img = document.createElement("img");
+//         img.src = src;
+//         img.onload = function () {
+//             resolve(img);
+//         };
+//         img.onerror = function () {
+//             reject();
+//         };
+//     });
+// }
+// function* load() {
+//     let a = yield loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png");
+//     console.log(a);
+//     let b = yield loadImage("https://www.1jtec.com/images/keryiBarter_register_bg.png");
+//     console.log(b);
+//     return b;
+// }
+// coLoad(load).then(function resolve(imgWidth) {
+//     console.log(imgWidth);
+// }, function reject() {
+//
+// });
+// function coLoad(gen) {
+//     let lg = gen();
+//     return new Promise(function promise(resolve, reject) {
+//         (function nextImg(img) {
+//             let img_generator = lg.next(img ? img.height : undefined),
+//                 value = img_generator.value,
+//                 done = img_generator.done;
+//             if (done) {
+//                 resolve(value);
+//             } else {
+//                 value.then(nextImg, reject);
+//             }
+//         })();
+//     });
+// }
+// function loadImage(src) {
+//     return new Promise(function promise(resolve, reject) {
+//         let img = document.createElement("img");
+//         img.onload = function () {
+//             resolve(img);
+//         };
+//         img.onerror = function () {
+//             reject();
+//         };
+//         img.src = src;
+//     });
+// }
+//pending直接返回fulfiled或者rejected的结果
+// async function load() {
+//     let a = await loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png");
+//     console.log(a.height);
+//     let b = await loadImage("https://www.1jtec.com/images/keryiBarter_register_bg.png");
+//     console.log(b.height);
+//     return b;
+// }
+// load().then(function resolve(img) {
+//     console.log(img.height);
+// }, function reject() {
+//
+// });
+// 使用正则表达式去除'aabbccddeexxxxaa'中的相邻重复字母，得到abcdexa
+// function excuteRepeat(string) {
+//     let result = "",
+//         conLetter = "";
+//     return (function nextExec(string_ano) {
+//         let regExp = /[a-zA-Z]?/,
+//             execString = regExp.exec(string_ano)[0],
+//             splitString = string_ano.replace(regExp, "");
+//         if (conLetter !== execString) {
+//             conLetter = execString;
+//             result += conLetter;
+//         }
+//         splitString && nextExec(splitString);
+//         return result;
+//     })(string);
+// }
+// let result_string = excuteRepeat("aabbccddeexxxxaazz");
+// console.log(result_string);
+// console.log('aabbccddeexxxxaa'.replace(/([a-zA-Z])\1*/g, "$1"));
+// \1识别的是()中的值
+// replace第二个参数function识别的也是()中的值
+// let regExp = /([a-zA-Z])\1*/g,
+//     string = "aabbccddeexxxxaaz";
+// console.log(string.replace(regExp, function (match, string){
+//     return string;
+// }));
+// 使用正则表达式去除'aabbccddeexxxxaa'中的相邻重复字母，得到abcdexa
+// console.log('aabbccddeexxxxaa'.replace(/([a-zA-Z])\1*/g, function (match, string) {
+//     return string;
+// }));
+let data = [{
+    name: "Gary",
+    city: "杭州",
+    job: "前端工程师"
+}, {
+    name: "Aaron",
+    city: "上海",
+    job: "服务端工程师"
+}, {
+    name: "Doris",
+    city: "北京",
+    job: "架构工程师"
+}];
+function render(data) {
+    let container = $("#container"),
+        table = $("<table>");
+    container.html("");
+    table.append(`<th><tr><td>name</td><td>city</td><td>job</td></tr></th>`);
+    data.forEach(function each(dataItem, dataIndex) {
+        table.append(`<tr><td>${dataItem["name"]}</td><td>${dataItem["city"]}</td><td>${dataItem["job"]}</td></tr>`);
     });
+    container.append(table);
 }
-
-function putImage(image) {
-    document.body.appendChild(image);
-}
-
-Promise.race([
-    loadImage("https://www.1jtec.com/images/keryiBarter_description_bg.png"),
-    loadImage("https://www.1jtec.com/images/keryiBarter_login_bg.png"),
-    loadImage("https://www.1jtec.com/images/keryiBarter_register_bg.png")
-]).then(putImage);
+$("button").on("click", function changeDate(e) {
+    data[0]["city"] = "广州";
+    data[2]["job"] = "测试工程师";
+    render(data);
+    e.stopImmediatePropagation();
+});
+render(data);
