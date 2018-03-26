@@ -27,7 +27,10 @@ module.exports = {
             APP_DIR,
             DLL_DIR,
             "node_modules"
-        ]
+        ],
+        alias: {
+            vue$: "vue/dist/vue.common.js"
+        }
     },
     externals: {
         jquery: "jQuery"

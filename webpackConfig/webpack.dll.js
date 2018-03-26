@@ -7,7 +7,7 @@ const ROOT_DIR = path.resolve(__dirname, "../.."),
 module.exports = {
     devtool: "source-map",
     entry: {
-        vendor: ['react', 'react-router', 'react-dom', 'react-addons', 'redux', 'react-redux', 'redux-thunk', 'redux-logger', 'redux-saga', 'redux-devtools', 'prop-type', 'moment', 'antd']
+        vendor: ['react', 'react-router', 'react-dom', 'react-addons', 'redux', 'react-redux', 'redux-thunk', 'redux-logger', 'redux-saga', 'redux-devtools', 'prop-type', 'moment', 'antd', 'vue']
     },
     output: {
         publicPath: PUBLIC_DIR,
