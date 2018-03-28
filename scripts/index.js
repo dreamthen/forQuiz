@@ -692,10 +692,10 @@
 // };
 // let medianSorted = findMedianSortedArrays([1, 3], [2, 4]);
 // console.log(medianSorted);
-/**
- * @param {string} s
- * @return {string}
- */
+// /**
+//  * @param {string} s
+//  * @return {string}
+//  */
 // let longestPalindrome = function (s) {
 //     let longestString = "",
 //         substring = "",
@@ -712,20 +712,84 @@
 //     }
 //     return longestString;
 // };
-let longestPalindrome = function (s) {
-    let longestString = "",
-        substring = "",
-        len = s.length;
-    for (let i = 0; i < len; i++) {
-        for (let j = 0; j < s.length; j++) {
-            substring += s[j];
-            if ((substring.split("").reverse().join("") === substring) && (substring.length > longestString.length)) {
-                longestString = substring;
-            }
-        }
-        s = s.slice(1);
-        substring = "";
-    }
-    return longestString;
-};
-console.log(longestPalindrome("abcba"));
+// let longestPalindrome = function (s) {
+//     let longestString = "",
+//         substring = "",
+//         len = s.length;
+//     for (let i = 0; i < len; i++) {
+//         for (let j = 0; j < s.length; j++) {
+//             substring += s[j];
+//             if ((substring.split("").reverse().join("") === substring) && (substring.length > longestString.length)) {
+//                 longestString = substring;
+//             }
+//         }
+//         s = s.slice(1);
+//         substring = "";
+//     }
+//     return longestString;
+// };
+// console.log(longestPalindrome("abcba"));
+// /**
+//  * @param {number} x
+//  * @return {number}
+//  */
+// let reverse = function(x) {
+//     let x_string,
+//         x_float;
+//     if (x >= 0) {
+//         x_string = x.toFixed(0).split("").reverse().join("");
+//         x_float = parseFloat(x_string);
+//         //2的31次方-1
+//         if (x_float <= (Math.pow(2, 31) - 1)) {
+//             return x_float;
+//         } else {
+//             return 0;
+//         }
+//     } else {
+//         //-2的31次方
+//         x_string = x.toFixed(0).slice(1).split("").reverse().join("");
+//         x_float = -parseFloat(x_string);
+//         if (x_float >= -Math.pow(2, 31)) {
+//             return x_float;
+//         } else {
+//             return 0;
+//         }
+//     }
+// };
+// console.log(reverse(1563847412));
+// /**
+//  * @param {string} s
+//  * @param {string} p
+//  * @return {boolean}
+//  */
+// let isMatch = function(s, p) {
+//     let regExp = new RegExp(p),
+//         emptyRegExp = /^(.\**)\1*$/;
+//     if (!s && (p.indexOf("*") === -1) && p !== "") {
+//         return false;
+//     }
+//     if(!s && p.indexOf("*") >= 0) {
+//         if(!emptyRegExp.test(p)){
+//             return false;
+//         }
+//     }
+//     s = s.replace(regExp, "");
+//     return !s;
+// };
+// console.log(isMatch("", "..*"));
+// /**
+//  * @param {number[]} nums
+//  * @return {boolean}
+//  */
+// let containsDuplicate = function(nums) {
+//     let map = {};
+//     for (let [key, value] of nums.entries()) {
+//         if (!map[`number${value}`]) {
+//             map[`number${value}`] = `number${value}`;
+//         } else {
+//             return true;
+//         }
+//     }
+//     return false;
+// };
+// console.log(containsDuplicate([0,4,5,0,3,6]));
