@@ -793,3 +793,51 @@
 //     return false;
 // };
 // console.log(containsDuplicate([0,4,5,0,3,6]));
+// var intersect = function (nums1, nums2) {
+//     let result_arr = [];
+//     for (let [key, value] of nums1.entries()) {
+//         for (let [key_ano, value_ano] of nums2.entries()) {
+//             if (value === value_ano) {
+//                 result_arr = [...result_arr, value];
+//                 nums1.splice(key, 1, "");
+//                 nums2.splice(key_ano, 1, "");
+//                 break;
+//             }
+//         }
+//     }
+//     return result_arr;
+// };
+// console.log(intersect([1, 2], [1, 1]));
+// let newDigits = digits.map(function digitsMap(item, index){
+//     return item + 1;
+// });
+// newDigits.sort(function sort(a, b){
+//     return b - a;
+// });
+// return newDigits;
+// let newDigits = [];
+// for (let [key, value] of digits.entries()) {
+//     let newValue = value + 1;
+//     if ((newValue) >= 10) {
+//         newDigits = [...newDigits, Math.floor(newValue / 10), newValue % 10];
+//     } else {
+//         newDigits = [...newDigits, value];
+//     }
+// }
+// newDigits.sort(function sort(a, b) {
+//     return b - a;
+// });
+// return newDigits;
+// let newDigits = [],
+//     digitString = digits.join(""),
+//     digitNumber = parseInt(digitString);
+// digitNumber += 1;
+// newDigits = digitNumber.toString().split("");
+// newDigits = newDigits.map(function digits(digitItem, index) {
+//     return parseInt(digitItem);
+// });
+// return newDigits;
+var plusOne = function (digits) {
+
+};
+console.log(plusOne([1, 0]));
