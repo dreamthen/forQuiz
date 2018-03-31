@@ -65,6 +65,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
-    "snabbdom": "^0.7.1"
+    "snabbdom": "^0.7.1",
+    "vue": "^2.5.16"
   }
 }

@@ -840,27 +840,229 @@
 // function replaceChildren(vcode, newCode) {
 //
 // }
-var addTwoNumbers = function (l1, l2) {
-    let result_num = 0,
-        arg_length = arguments.length,
-        arg_arr = Array.prototype.slice.call(arguments);
-    for (let [key, value] of arg_arr.entries()) {
-        let flag_num = 0;
-        (function addInner(innerValue) {
-            let value = innerValue.val,
-                next = innerValue.next;
-            result_num += (value * Math.pow(10, flag_num));
-            flag_num++;
-            next && addInner(next);
-        })(value);
-    }
-    let length = result_num.toString().length,
-        result_arr = [];
-    for (let i = 0; i < length; i++) {
-        result_arr[i] = result_num % 10;
-        result_num = Math.trunc(result_num / 10);
-    }
-    return result_arr;
-};
-addTwoNumbers();
-
+// var addTwoNumbers = function (l1, l2) {
+//     let result_num = 0,
+//         arg_length = arguments.length,
+//         arg_arr = Array.prototype.slice.call(arguments);
+//     for (let [key, value] of arg_arr.entries()) {
+//         let flag_num = 0;
+//         (function addInner(innerValue) {
+//             let value = innerValue.val,
+//                 next = innerValue.next;
+//             result_num += (value * Math.pow(10, flag_num));
+//             flag_num++;
+//             next && addInner(next);
+//         })(value);
+//     }
+//     let length = result_num.toString().length,
+//         result_arr = [];
+//     for (let i = 0; i < length; i++) {
+//         result_arr[i] = result_num % 10;
+//         result_num = Math.trunc(result_num / 10);
+//     }
+//     return result_arr;
+// };
+// addTwoNumbers();
+// jQuery todoList
+// $(function () {
+//     let info = $("#user-info"),
+//         btn = $("#btn"),
+//         list = $("#ulList");
+//     btn.on("click", (e) => {
+//         let val = info.val(),
+//             li = $(`<li>${val}</li>`);
+//         list.append(li);
+//         info.val("");
+//         e.stopImmediatePropagation();
+//     });
+// });
+// import Vue from "vue";
+// let app = new Vue({
+//     el: "#app",
+//     data: {
+//         userInfo: "",
+//         ulList: []
+//     },
+//     methods: {
+//         addList() {
+//             this.ulList.push(this.userInfo);
+//             this.userInfo = "";
+//         }
+//     }
+// });
+// let lengthOfLongestSubstring = function (s) {
+//     let p1 = 0, p2 = 0, len = s.length, longest = 0, hash = {};
+//     while (p1 < len) {
+//         if (hash[s[p1]] !== undefined) {
+//             p2 = Math.max(hash[s[p1]] + 1, p2);
+//         }
+//         longest = Math.max(longest, p1 - p2 + 1);
+//         hash[s[p1]] = p1;
+//         p1++;
+//     }
+//     return longest;
+// };
+// console.log(lengthOfLongestSubstring("abba"));
+// let findMedianSortedArrays = function (nums1, nums2) {
+//     let new_arr = nums1.concat(nums2),
+//         len = new_arr.length,
+//         index = (len / 2).toFixed(0) - 1;
+//     new_arr.sort(function (a, b) {
+//         return a - b;
+//     });
+//     if (len % 2 === 0) {
+//         return parseFloat(((new_arr[index] + new_arr[index + 1]) / 2).toFixed(1));
+//     } else {
+//         return parseFloat(new_arr[index].toFixed(1));
+//     }
+// };
+// let medianSorted = findMedianSortedArrays([1, 3], [2, 4]);
+// console.log(medianSorted);
+// /**
+//  * @param {string} s
+//  * @return {string}
+//  */
+// let longestPalindrome = function (s) {
+//     let longestString = "",
+//         substring = "",
+//         len = s.length;
+//     for (let i = 0; i < len; i++) {
+//         for (let j = 0; j < s.length; j++) {
+//             substring += s[j];
+//             if ((substring.split("").reverse().join("") === substring) && (substring.length > longestString.length)) {
+//                 longestString = substring;
+//             }
+//         }
+//         s = s.slice(1);
+//         substring = "";
+//     }
+//     return longestString;
+// };
+// let longestPalindrome = function (s) {
+//     let longestString = "",
+//         substring = "",
+//         len = s.length;
+//     for (let i = 0; i < len; i++) {
+//         for (let j = 0; j < s.length; j++) {
+//             substring += s[j];
+//             if ((substring.split("").reverse().join("") === substring) && (substring.length > longestString.length)) {
+//                 longestString = substring;
+//             }
+//         }
+//         s = s.slice(1);
+//         substring = "";
+//     }
+//     return longestString;
+// };
+// console.log(longestPalindrome("abcba"));
+// /**
+//  * @param {number} x
+//  * @return {number}
+//  */
+// let reverse = function(x) {
+//     let x_string,
+//         x_float;
+//     if (x >= 0) {
+//         x_string = x.toFixed(0).split("").reverse().join("");
+//         x_float = parseFloat(x_string);
+//         //2的31次方-1
+//         if (x_float <= (Math.pow(2, 31) - 1)) {
+//             return x_float;
+//         } else {
+//             return 0;
+//         }
+//     } else {
+//         //-2的31次方
+//         x_string = x.toFixed(0).slice(1).split("").reverse().join("");
+//         x_float = -parseFloat(x_string);
+//         if (x_float >= -Math.pow(2, 31)) {
+//             return x_float;
+//         } else {
+//             return 0;
+//         }
+//     }
+// };
+// console.log(reverse(1563847412));
+// /**
+//  * @param {string} s
+//  * @param {string} p
+//  * @return {boolean}
+//  */
+// let isMatch = function(s, p) {
+//     let regExp = new RegExp(p),
+//         emptyRegExp = /^(.\**)\1*$/;
+//     if (!s && (p.indexOf("*") === -1) && p !== "") {
+//         return false;
+//     }
+//     if(!s && p.indexOf("*") >= 0) {
+//         if(!emptyRegExp.test(p)){
+//             return false;
+//         }
+//     }
+//     s = s.replace(regExp, "");
+//     return !s;
+// };
+// console.log(isMatch("", "..*"));
+// /**
+//  * @param {number[]} nums
+//  * @return {boolean}
+//  */
+// let containsDuplicate = function(nums) {
+//     let map = {};
+//     for (let [key, value] of nums.entries()) {
+//         if (!map[`number${value}`]) {
+//             map[`number${value}`] = `number${value}`;
+//         } else {
+//             return true;
+//         }
+//     }
+//     return false;
+// };
+// console.log(containsDuplicate([0,4,5,0,3,6]));
+// var intersect = function (nums1, nums2) {
+//     let result_arr = [];
+//     for (let [key, value] of nums1.entries()) {
+//         for (let [key_ano, value_ano] of nums2.entries()) {
+//             if (value === value_ano) {
+//                 result_arr = [...result_arr, value];
+//                 nums1.splice(key, 1, "");
+//                 nums2.splice(key_ano, 1, "");
+//                 break;
+//             }
+//         }
+//     }
+//     return result_arr;
+// };
+// console.log(intersect([1, 2], [1, 1]));
+// let newDigits = digits.map(function digitsMap(item, index){
+//     return item + 1;
+// });
+// newDigits.sort(function sort(a, b){
+//     return b - a;
+// });
+// return newDigits;
+// let newDigits = [];
+// for (let [key, value] of digits.entries()) {
+//     let newValue = value + 1;
+//     if ((newValue) >= 10) {
+//         newDigits = [...newDigits, Math.floor(newValue / 10), newValue % 10];
+//     } else {
+//         newDigits = [...newDigits, value];
+//     }
+// }
+// newDigits.sort(function sort(a, b) {
+//     return b - a;
+// });
+// return newDigits;
+// let newDigits = [],
+//     digitString = digits.join(""),
+//     digitNumber = parseInt(digitString);
+// digitNumber += 1;
+// newDigits = digitNumber.toString().split("");
+// newDigits = newDigits.map(function digits(digitItem, index) {
+//     return parseInt(digitItem);
+// });
+// return newDigits;
+// var plusOne = function (digits) {
+// };
+// console.log(plusOne([1, 0]));
