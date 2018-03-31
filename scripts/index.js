@@ -607,33 +607,260 @@
 // console.log('aabbccddeexxxxaa'.replace(/([a-zA-Z])\1*/g, function (match, string) {
 //     return string;
 // }));
-let data = [{
-    name: "Gary",
-    city: "杭州",
-    job: "前端工程师"
-}, {
-    name: "Aaron",
-    city: "上海",
-    job: "服务端工程师"
-}, {
-    name: "Doris",
-    city: "北京",
-    job: "架构工程师"
-}];
-function render(data) {
-    let container = $("#container"),
-        table = $("<table>");
-    container.html("");
-    table.append(`<th><tr><td>name</td><td>city</td><td>job</td></tr></th>`);
-    data.forEach(function each(dataItem, dataIndex) {
-        table.append(`<tr><td>${dataItem["name"]}</td><td>${dataItem["city"]}</td><td>${dataItem["job"]}</td></tr>`);
-    });
-    container.append(table);
-}
-$("button").on("click", function changeDate(e) {
-    data[0]["city"] = "广州";
-    data[2]["job"] = "测试工程师";
-    render(data);
-    e.stopImmediatePropagation();
-});
-render(data);
+// let data = [{
+//     name: "Gary",
+//     city: "杭州",
+//     job: "前端工程师"
+// }, {
+//     name: "Aaron",
+//     city: "上海",
+//     job: "服务端工程师"
+// }, {
+//     name: "Doris",
+//     city: "北京",
+//     job: "架构工程师"
+// }];
+// function render(data) {
+//     let container = $("#container"),
+//         table = $("<table>");
+//     container.html("");
+//     table.append(`<th><tr><td>name</td><td>city</td><td>job</td></tr></th>`);
+//     data.forEach(function each(dataItem, dataIndex) {
+//         table.append(`<tr><td>${dataItem["name"]}</td><td>${dataItem["city"]}</td><td>${dataItem["job"]}</td></tr>`);
+//     });
+//     container.append(table);
+// }
+// $("button").on("click", function changeDate(e) {
+//     data[0]["city"] = "广州";
+//     data[2]["job"] = "测试工程师";
+//     render(data);
+//     e.stopImmediatePropagation();
+// });
+// render(data);
+// const snabbdom = require("snabbdom");
+// const patch = snabbdom.init([
+//     require("snabbdom/modules/class").default,
+//     require("snabbdom/modules/props").default,
+//     require("snabbdom/modules/style").default,
+//     require("snabbdom/modules/eventlisteners").default
+// ]);
+// const h = snabbdom.h;
+// let container = document.getElementById("container"),
+//     change = $("#changeData"),
+//     vcode = h("ul#list", {style: {color: "brown"}}, [
+//         h("li.listItem", {}, "item one"),
+//         h("li.listItem", {}, "item two")
+//     ]);
+// patch(container, vcode);
+// let newVCode = h("ul#list", {style: {color: "brown"}}, [
+//     h('li.listItem', {}, 'item one'),
+//     h('li.listItem', {}, 'item Number B'),
+//     h('li.listItem', {}, 'item three')
+// ]);
+// change.on("click", function (e) {
+//     patch(vcode, newVCode);
+//     e.stopImmediatePropagation();
+// });
+// demo重做
+// const snabbdom = require("snabbdom"),
+//     patch = snabbdom.init([
+//         require("snabbdom/modules/class").default,
+//         require("snabbdom/modules/props").default,
+//         require("snabbdom/modules/style").default,
+//         require("snabbdom/modules/eventlisteners").default
+//     ]),
+//     h = snabbdom.h;
+// const data = [{
+//     name: "姓名",
+//     city: "城市",
+//     job: "工作"
+// }, {
+//     name: "Gary",
+//     city: "深圳",
+//     job: "前端工程师"
+// }, {
+//     name: "Aaron",
+//     city: "上海",
+//     job: "服务端工程师"
+// }, {
+//     name: "Doris",
+//     city: "杭州",
+//     job: "架构师"
+// }];
+// let vcode,
+//     container = document.getElementById("container"),
+//     btn = $("#changeData");
+// function render(data) {
+//     let newVCode = h("table.table_mine", {style: {color: "brown"}}, data.map(function dataItem(item, index) {
+//         let tdArr = [];
+//         for (let [key, value] of Object.entries(item)) {
+//             if (item.hasOwnProperty(key)) {
+//                 tdArr = [...tdArr, h("td.td_mine", {}, value)];
+//             }
+//         }
+//         return h("tr.tr_mine", {}, tdArr);
+//     }));
+//     if (vcode) {
+//         patch(vcode, newVCode);
+//     } else {
+//         patch(container, newVCode);
+//     }
+//     vcode = newVCode;
+// }
+// btn.on("click", function (e) {
+//     data[1]["city"] = "北京";
+//     data[2]["job"] = "测试工程师";
+//     render(data);
+//     e.stopImmediatePropagation();
+// });
+// render(data);
+// diff算法
+// const data_format = {
+//     tag: "ul",
+//     attrs: {
+//         id: "list",
+//         className: "list"
+//     },
+//     children: [{
+//         tag: "li",
+//         attrs: {
+//             className: "list-item"
+//         },
+//         children: ["item one"]
+//     }, {
+//         tag: "li",
+//         attrs: {
+//             className: "list-item"
+//         },
+//         children: ["item two"]
+//     }]
+// };
+// function createElement(vcode) {
+//     let tag = vcode.tag,
+//         attrs = vcode.attrs || {},
+//         children = vcode.children || [];
+//     if (!tag) {
+//         return null;
+//     }
+//     let elem = document.createElement(tag);
+//     for (let [key, value] of Object.entries(attrs)) {
+//         if (attrs.hasOwnProperty(key)) {
+//             elem.setAttribute(key, value);
+//         }
+//     }
+//     children && children.length && children.forEach((item, index) => {
+//         elem.appendChild(createElement(item));
+//     });
+//     return elem;
+// }
+// const snabbdom = require("snabbdom"),
+//     patch = snabbdom.init([
+//         require("snabbdom/modules/class").default,
+//         require("snabbdom/modules/props").default,
+//         require("snabbdom/modules/style").default,
+//         require("snabbdom/modules/eventlisteners").default
+//     ]),
+//     h = snabbdom.h;
+// const data = [{
+//     name: "姓名",
+//     city: "城市",
+//     job: "工作"
+// }, {
+//     name: "Gary",
+//     city: "杭州",
+//     job: "前端工程师"
+// }, {
+//     name: "Aaron",
+//     city: "上海",
+//     job: "服务端工程师"
+// }, {
+//     name: "Doris",
+//     city: "深圳",
+//     job: "架构师"
+// }];
+// let container = document.getElementById("container"),
+//     change = $("#changeData"),
+//     vcode;
+// function render(data) {
+//     let newVCode = h("table#table_mine", {style: {color: "brown"}}, data.map((item, index) => {
+//         let tdArr = [];
+//         for (let [key, value] of Object.entries(item)) {
+//             if(item.hasOwnProperty(key)){
+//                 tdArr = [...tdArr, h("td.td_mine", {}, value)];
+//             }
+//         }
+//         return h("tr.tr_mine", {}, tdArr);
+//     }));
+//     if (vcode) {
+//         patch(vcode, newVCode);
+//     } else {
+//         patch(container, newVCode);
+//     }
+//     vcode = newVCode;
+// }
+// change.on("click", (e)=> {
+//     data[1]["city"] = "北京";
+//     data[2]["job"] = "测试工程师";
+//     render(data);
+//     e.stopImmediatePropagation();
+// });
+// render(data);
+// function createElement(vcode) {
+//     let tag = vcode.tag,
+//         attrs = vcode.attrs || {},
+//         children = vcode.children || [];
+//     if (!tag) {
+//         return null;
+//     }
+//     let elem = document.createElement(tag);
+//     for (let [key, value] of Object.entries(attrs)) {
+//         elem.setAttribute(key, value);
+//     }
+//     children.forEach((item, index) => {
+//         elem.appendChild(createElement(item));
+//     });
+//     return elem;
+// }
+// function updateChildren(vcode, newVCode) {
+//     let vcodeChildren = vcode["children"] || [],
+//         newVCodeChildren = newVCode["children"] || [];
+//     for (let [key, value] of vcodeChildren.entries()) {
+//         let newValue = newVCodeChildren[key];
+//         if (!newValue) {
+//             break;
+//         }
+//         if (value["tag"] === newValue["tag"]) {
+//             updateChildren(value, newValue);
+//         }
+//         if (value["tag"] !== newValue["tag"]) {
+//             replaceChildren(value, newValue);
+//         }
+//     }
+// }
+// function replaceChildren(vcode, newCode) {
+//
+// }
+var addTwoNumbers = function (l1, l2) {
+    let result_num = 0,
+        arg_length = arguments.length,
+        arg_arr = Array.prototype.slice.call(arguments);
+    for (let [key, value] of arg_arr.entries()) {
+        let flag_num = 0;
+        (function addInner(innerValue) {
+            let value = innerValue.val,
+                next = innerValue.next;
+            result_num += (value * Math.pow(10, flag_num));
+            flag_num++;
+            next && addInner(next);
+        })(value);
+    }
+    let length = result_num.toString().length,
+        result_arr = [];
+    for (let i = 0; i < length; i++) {
+        result_arr[i] = result_num % 10;
+        result_num = Math.trunc(result_num / 10);
+    }
+    return result_arr;
+};
+addTwoNumbers();
+
